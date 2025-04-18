@@ -1,0 +1,26 @@
+{
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname}-Page"
+  },
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#430d7a",
+    "activityBar.background": "#2e005c",
+    "activityBar.foreground": "#FFFFFF",
+    "activityBar.inactiveForeground": "#FFFFFF99",
+    "activityBarBadge.background": "#430d7a",
+    "activityBarBadge.foreground": "#FFFFFF",
+    "commandCenter.border": "#430d7a99",
+    "sash.hoverBorder": "#430d7a",
+    "statusBar.background": "#2e005c",
+    "statusBar.foreground": "#FFFFFF",
+    "statusBarItem.hoverBackground": "#430d7a",
+    "statusBarItem.remoteBackground": "#2e005c",
+    "statusBarItem.remoteForeground": "#FFFFFF",
+    "titleBar.activeBackground": "#2e005c",
+    "titleBar.activeForeground": "#FFFFFF",
+    "titleBar.inactiveBackground": "#2e005c99",
+    "titleBar.inactiveForeground": "#FFFFFF99"
+  },
+  "editor.formatOnSave": true
+}
