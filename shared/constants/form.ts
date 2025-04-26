@@ -1,9 +1,10 @@
 import TextInput from "@/components/form/TextInput";
 import { createFormHook, createFormHookContexts } from "@tanstack/react-form";
 
-const { fieldContext, formContext } = createFormHookContexts();
+export const { fieldContext, formContext, useFieldContext } =
+  createFormHookContexts();
 
-const { useAppForm } = createFormHook({
+export const { useAppForm, withForm } = createFormHook({
   fieldComponents: {
     TextInput,
   },
@@ -11,5 +12,3 @@ const { useAppForm } = createFormHook({
   fieldContext,
   formContext,
 });
-
-export { useAppForm };

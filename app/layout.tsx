@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NextJS Boilerplate",
-  description: "NextJS Frontend Boilerplate",
+  title: "Day Off Application",
+  description: "Day Off | Holiday planner application",
 };
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
             <ToastProvider>
               <ToastWrapper />
               <Header />
-              <div className="w-full p-4 md:p-16">{children}</div>
+              <div className="w-full p-4 md:p-8">{children}</div>
             </ToastProvider>
           </body>
         </Suspense>
