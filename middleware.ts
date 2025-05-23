@@ -19,6 +19,10 @@ const routes: RouteItem[] = [
     path: "/register",
     roles: [ROLE.GUEST],
   },
+  {
+    path: "/optimized-result",
+    roles: [ROLE.GUEST],
+  },
 ];
 
 export async function middleware(request: NextRequest) {

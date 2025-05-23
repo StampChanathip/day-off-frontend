@@ -3,7 +3,7 @@ import { InputType } from "@/shared/enums/form";
 
 const LeaveDaysInput = withForm({
   defaultValues: {
-    dayOffAmount: 1,
+    leaveAmount: 1,
   },
   render: function Render({ form }) {
     return (
@@ -18,7 +18,7 @@ const LeaveDaysInput = withForm({
           </p>
         </div>
         <form.AppField
-          name="dayOffAmount"
+          name="leaveAmount"
           children={(field) => (
             <field.TextInput
               label="Amount of days"

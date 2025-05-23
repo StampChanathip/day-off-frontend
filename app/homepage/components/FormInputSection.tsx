@@ -3,10 +3,33 @@ import { z } from "zod";
 import { useAppForm } from "@/shared/constants/form";
 import HolidaysInput from "./HolidaysInput";
 import LeaveDaysInput from "./LeaveDaysInput";
+import { useMutation } from "@tanstack/react-query";
+import { useToast } from "@/shared/providers/ToastProvider";
+import { homepage } from "@/api/homePageApi";
+import { OptimizeHolidaysRequest } from "@/shared/types/api/holidaysApiType";
+import dayjs from "dayjs";
 
 export default function FormInputSection() {
+  const { showError, showSuccess } = useToast();
+  const { mutateAsync } = useMutation({
+    mutationFn: (request: OptimizeHolidaysRequest) =>
+      homepage.submitOptimizeHolidays(request),
+    onSuccess: () => {
+      showSuccess("Holidays Optimized");
+    },
+    onError(error) {
+      showError(error.message);
+    },
+  });
+
+  const handleSubmitOptimizeHolidays = async (
+    request: OptimizeHolidaysRequest
+  ) => {
+    await mutateAsync(request);
+  };
+
   const FormSchema = z.object({
-    dayOffAmount: z.coerce
+    leaveAmount: z.coerce
       .number({
         required_error: "Amount is required",
         invalid_type_error: "Amount must be a number",
@@ -17,13 +40,18 @@ export default function FormInputSection() {
 
   const form = useAppForm({
     defaultValues: {
-      dayOffAmount: 1,
+      leaveAmount: 1,
     },
     validators: {
       onChange: FormSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      const { leaveAmount } = value;
+      handleSubmitOptimizeHolidays({
+        leaveAmount,
+        startDate: dayjs("2025-01-01").format("YYYY-MM-DD"), //TODO: change to get from input
+        endDate: dayjs("2025-12-31").format("YYYY-MM-DD"), //TODO: change to get from input
+      });
     },
   });
 

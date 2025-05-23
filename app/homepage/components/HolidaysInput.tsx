@@ -3,16 +3,14 @@ import { homepage } from "@/api/homePageApi";
 import Loading from "@/components/utils/Loading";
 import { withForm } from "@/shared/constants/form";
 import { CalendarIcon, InformationIcon } from "@/shared/icons/icons";
-import {
-  BotHolidaysResponse,
-  HolidayItemDisplay,
-} from "@/shared/types/holidaysType";
+import { BotHolidaysResponse } from "@/shared/types/api/holidaysApiType";
+import { HolidayItemDisplay } from "@/shared/types/holidaysType";
 import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
 const HolidaysInput = withForm({
   defaultValues: {
-    dayOffAmount: 1,
+    leaveAmount: 1,
   },
   render: function Render() {
     const { data: holidaysList = [], isLoading } = useQuery<
