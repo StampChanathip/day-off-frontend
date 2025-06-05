@@ -5,15 +5,17 @@ import HolidaysInput from "./HolidaysInput";
 import LeaveDaysInput from "./LeaveDaysInput";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@/shared/providers/ToastProvider";
-import { homepage } from "@/api/homePageApi";
 import { OptimizeHolidaysRequest } from "@/shared/types/api/holidaysApiType";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
+import { userHolidayApi } from "@/api/userHolidayApi";
 
 export default function FormInputSection() {
+  const router = useRouter();
   const { showError, showSuccess } = useToast();
   const { mutateAsync } = useMutation({
     mutationFn: (request: OptimizeHolidaysRequest) =>
-      homepage.submitOptimizeHolidays(request),
+      userHolidayApi.submitOptimizeHolidays(request),
     onSuccess: () => {
       showSuccess("Holidays Optimized");
     },
@@ -25,7 +27,8 @@ export default function FormInputSection() {
   const handleSubmitOptimizeHolidays = async (
     request: OptimizeHolidaysRequest
   ) => {
-    await mutateAsync(request);
+    const { resultId } = (await mutateAsync(request)).data;
+    await router.push(`/optimized-result/?resultId=${resultId}`);
   };
 
   const FormSchema = z.object({
@@ -49,7 +52,7 @@ export default function FormInputSection() {
       const { leaveAmount } = value;
       handleSubmitOptimizeHolidays({
         leaveAmount,
-        startDate: dayjs("2025-01-01").format("YYYY-MM-DD"), //TODO: change to get from input
+        startDate: dayjs().format("YYYY-MM-DD"), //TODO: change to get from input
         endDate: dayjs("2025-12-31").format("YYYY-MM-DD"), //TODO: change to get from input
       });
     },

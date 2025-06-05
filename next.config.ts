@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Transpile react-day-picker to fix ESM issues
+  transpilePackages: ["react-day-picker"],
 };
 
-export default nextConfig;
+module.exports = nextConfig;
