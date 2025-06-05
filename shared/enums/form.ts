@@ -22,3 +22,8 @@ export enum InputType {
   Url = "url",
   Week = "week",
 }
+
+export enum HolidaysChoice {
+  BankOfThailand = "BOT",
+  Custom = "CUSTOM",
+}
