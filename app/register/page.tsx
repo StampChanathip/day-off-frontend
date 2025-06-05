@@ -1,11 +1,10 @@
 "use client";
 import { auth } from "@/api/authApi";
-import TextInput from "@/components/form/TextInput";
 import Loading from "@/components/utils/Loading";
 import { InputType } from "@/shared/enums/form";
 import { useToast } from "@/shared/providers/ToastProvider";
 import { registerRequestType } from "@/shared/types/api/authApiType";
-import { useForm } from "@tanstack/react-form";
+import { useAppForm } from "@/shared/constants/form";
 import { useMutation } from "@tanstack/react-query";
 import { z } from "zod";
 
@@ -42,7 +41,7 @@ export default function Register() {
       path: ["confirmedPassword"],
     });
 
-  const form = useForm({
+  const form = useAppForm({
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -77,98 +76,55 @@ export default function Register() {
           <div className="flex flex-col items-center w-sm md:w-lg space-y-3">
             <h1 className="text-5xl font-bold">Register</h1>
             <div className="flex flex-row w-full space-x-1 md:space-x-4 justify-between">
-              <form.Field
+              <form.AppField
                 name="firstName"
                 children={(field) => (
-                  <>
-                    <TextInput
-                      label="First Name"
-                      type={InputType.Text}
-                      placeHolder="First Name"
-                      errorMessage={
-                        field.state.meta.errors[0]
-                          ? field.state.meta.errors[0].message
-                          : ""
-                      }
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                    />
-                  </>
+                  <field.TextInput
+                    label="First Name"
+                    type={InputType.Text}
+                    placeHolder="First Name"
+                  />
                 )}
               />
-              <form.Field
+              <form.AppField
                 name="lastName"
                 children={(field) => (
-                  <>
-                    <TextInput
-                      label="Last Name"
-                      type={InputType.Text}
-                      placeHolder="Last Name"
-                      errorMessage={
-                        field.state.meta.errors[0]
-                          ? field.state.meta.errors[0].message
-                          : ""
-                      }
-                      value={field.state.value}
-                      onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                    />
-                  </>
+                  <field.TextInput
+                    label="Last Name"
+                    type={InputType.Text}
+                    placeHolder="Last Name"
+                  />
                 )}
               />
             </div>
-            <form.Field
+            <form.AppField
               name="email"
               children={(field) => (
-                <>
-                  <TextInput
-                    label="Email"
-                    type={InputType.Email}
-                    placeHolder="Email"
-                    errorMessage={
-                      field.state.meta.errors[0]
-                        ? field.state.meta.errors[0].message
-                        : ""
-                    }
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </>
-              )}
-            />
-            <form.Field
-              name="password"
-              children={(field) => (
-                <TextInput
-                  label="Password"
-                  type={InputType.Password}
-                  placeHolder="Password"
-                  value={field.state.value}
-                  onBlur={field.handleBlur}
-                  onChange={(e) => field.handleChange(e.target.value)}
+                <field.TextInput
+                  label="Email"
+                  type={InputType.Email}
+                  placeHolder="Email"
                 />
               )}
             />
-            <form.Field
+            <form.AppField
+              name="password"
+              children={(field) => (
+                <field.TextInput
+                  label="Password"
+                  type={InputType.Password}
+                  placeHolder="Password"
+                />
+              )}
+            />
+            <form.AppField
               name="confirmedPassword"
               children={(field) => (
-                <>
-                  <TextInput
-                    label="Confirmed Password"
-                    type={InputType.Password}
-                    placeHolder="Confirmed Password"
-                    errorMessage={
-                      field.state.meta.errors[0]
-                        ? field.state.meta.errors[0].message
-                        : ""
-                    }
-                    value={field.state.value}
-                    onBlur={field.handleBlur}
-                    onChange={(e) => field.handleChange(e.target.value)}
-                  />
-                </>
+                <field.TextInput
+                  label="Confirmed Password"
+                  type={InputType.Password}
+                  placeHolder="Confirmed Password"
+                />
               )}
             />
             <form.Subscribe
