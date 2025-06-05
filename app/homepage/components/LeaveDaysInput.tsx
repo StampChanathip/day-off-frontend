@@ -24,9 +24,6 @@ const LeaveDaysInput = withForm({
               label="Amount of days"
               type={InputType.Number}
               placeHolder="Enter your days"
-              onChange={(e) => {
-                field.handleChange(e.target.valueAsNumber);
-              }}
             />
           )}
         />

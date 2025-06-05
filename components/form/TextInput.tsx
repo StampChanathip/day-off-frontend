@@ -1,24 +1,28 @@
 import { useFieldContext } from "@/shared/constants/form";
-import { ChangeEventHandler, FocusEventHandler } from "react";
+import { ChangeEventHandler } from "react";
 
 type TextInputProps = {
   label?: string;
   placeHolder?: string;
   type: string;
-  value?: string | number | readonly string[] | undefined;
-  onChange: ChangeEventHandler<HTMLInputElement> | undefined;
-  onBlur?: FocusEventHandler<HTMLInputElement> | undefined;
-  errorMessage?: string;
 };
 
 export default function TextInput({
   label,
   placeHolder,
   type,
-  onChange,
 }: TextInputProps) {
-  const field = useFieldContext<string>();
+  const field = useFieldContext<string | number>();
   const errorMessage = field.state.meta.errors[0]?.message || "";
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    // Handle both string and number types
+    if (type === "number") {
+      field.handleChange(e.target.valueAsNumber);
+    } else {
+      field.handleChange(e.target.value);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -27,8 +31,8 @@ export default function TextInput({
         type={type}
         className="input w-full"
         placeholder={placeHolder}
-        value={field.state.value}
-        onChange={onChange}
+        value={field.state.value || ""}
+        onChange={handleChange}
         onBlur={field.handleBlur}
       />
       {errorMessage && (
